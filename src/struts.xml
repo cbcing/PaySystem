@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="defualt" extends="struts-default" namespace="/">
+
+        <interceptors>
+            <interceptor name="auth" class="com.scujcc.interceptor.Authority"></interceptor>
+        </interceptors>
+
+        <action name="addMoney" class="com.scujcc.action.PayAction" method="addMoney">
+            <result name="success" type="redirectAction">queryBalance</result>
+        </action>
+        <action name="queryBalance" class="com.scujcc.action.PayAction" method="queryBalance">
+            <result name="success" type="redirectAction">queryOperation</result>
+        </action>
+        <action name="queryOperation" class="com.scujcc.action.PayAction" method="queryOperation">
+            <result name="success" type="dispatcher">pay.jsp</result>
+        </action>
+
+        <action name="jumpToPayJsp" class="com.scujcc.action.JumpHelpAction" method="toPayJsp">
+            <result name="success" type="dispatcher">pay.jsp</result>
+        </action>
+
+        <action name="login" class="com.scujcc.action.LoginAction" method="login">
+            <result name="success" type="dispatcher">index.jsp</result>
+            <result name="login" type="dispatcher">login.jsp</result>
+        </action>
+        <action name="checkLogin" class="com.scujcc.action.CheckLoginAction">
+            <result name="success" type="redirectAction">login</result>
+            <result name="input" type="dispatcher">login.jsp</result>
+        </action>
+
+        <action name="exitSystem" class="com.scujcc.action.ExitSystem" method="exitSystem">
+            <result name="success" type="dispatcher">login.jsp</result>
+        </action>
+
+        <action name="getUsers" class="com.scujcc.action.UserAction" method="getUsers">
+            <result name="success" type="dispatcher">users.jsp</result>
+        </action>
+
+        <action name="getAdmins" class="com.scujcc.action.AdminAction" method="getAdmins">
+            <result name="success" type="dispatcher">admins.jsp</result>
+        </action>
+
+        <action name="insertOrUpdateUser" class="com.scujcc.action.UserAction" method="insertOrupdateUser">
+            <result name="success" type="redirectAction">getUsers</result>
+        </action>
+    </package>
+</struts>

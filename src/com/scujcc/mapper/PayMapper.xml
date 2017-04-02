@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scujcc.dao.PayDao">
+    <update id="addMoney" parameterType="com.scujcc.domain.User">
+        UPDATE users SET balance=#{balance}+balance WHERE tele=#{tele}
+    </update>
+    <select id="queryBalance" parameterType="com.scujcc.domain.User" resultType="com.scujcc.domain.User">
+        SELECT * FROM users WHERE tele=#{tele}
+    </select>
+    <select id="queryOperation" parameterType="com.scujcc.domain.User" resultType="com.scujcc.domain.Operation">
+        SELECT * FROM operations WHERE tele=#{tele}
+    </select>
+
+    <insert id="insertOperation" parameterType="com.scujcc.domain.Operation">
+        INSERT INTO operations VALUES (operation_id_seq.nextval,#{user_id},#{name},#{sex},#{tele},#{manage},#{manage_date},#{balance})
+    </insert>
+</mapper>
